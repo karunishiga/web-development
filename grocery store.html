@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Grocery Store</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f7;
+        }
+
+        header {
+            background-color: #16a085;
+            color: LightGoldenrodYellow;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+            font-size: 1rem;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            background-color: white;
+            padding: 1rem;
+            margin: 1rem;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .product p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .product button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 15rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        #cart-items {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            max-width: 80px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .cart-item .details {
+            flex: 1;
+            text-align: left;
+        }
+
+        .cart-item .details h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .cart-item .details p {
+            margin: 0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .cart-item button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .cart-item button:hover {
+            background-color: #e55347;
+        }
+
+        #checkout-bill {
+            list-style-type: none;
+            padding: 1rem;
+            margin: 1rem auto;
+            width: fit-content;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #checkout-bill ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #checkout-bill ul li {
+            padding: 0.10rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #checkout-bill ul li:last-child {
+            border-bottom: none;
+        }
+
+        #checkout-bill h3 {
+            margin-top: 2rem;
+            color: #4CAF50;
+        }
+
+        #qr-code {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ONLINE GROCERY STORE</h1>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="showPage('Home')">Home</a></li>
+                <li><a href="javascript:void(0);" onclick="showPage('shop')">Shop</a></li>
+                <li><a href="javascript:void(0);" onclick="showPage('cart')">Cart</a></li>
+                <li><a href="javascript:void(0);" onclick="showPage('checkout')">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="Home" class="page active">
+            <h2>Home Page</h2>
+            <p>Welcome to our online grocery store, where convenience meets quality. We are dedicated to bringing you the freshest produce, highest quality dairy, tender meats, and essential pantry staples—all delivered straight to your door. Our store offers a vast selection of items to cater to all your grocery needs, whether you're preparing a family meal or just stocking up your kitchen. Enjoy shopping with us for the best prices on the finest groceries, and experience the ease of online shopping with our user-friendly interface.</p>
+            <h2>Featured Products:</h2>
+            <h3>Fresh Apples:</h3>
+            <p>Crisp and juicy, our fresh apples are picked at the peak of ripeness to ensure maximum flavor and nutritional value. Whether enjoyed as a healthy snack or incorporated into your favorite recipes, these apples are a versatile addition to any meal. Price: $3.99 per lb.</p>
+            <h3>Ripe Bananas:</h3>
+            <p>Sweet and tender, our ripe bananas are perfect for smoothies, baking, or simply enjoying on their own. High in potassium and natural sugars, they provide a quick energy boost and are a great choice for a nutritious snack. Price: $1.29 per lb.</p>
+            <h3>Crunchy Carrots:</h3>
+            <p>Our carrots are freshly harvested and packed with flavor. Crisp and vibrant, they are ideal for snacking, adding to salads, or cooking in a variety of dishes. Rich in vitamins and minerals, these carrots are a healthy and delicious choice. Price: $2.49 per lb.</p>
+            <h3>Medjool Dates:</h3>
+            <p>Naturally sweet and chewy, Medjool dates are perfect for snacking or adding a touch of sweetness to your recipes. They are rich in fiber, potassium, and antioxidants, making them a nutritious and satisfying treat. Price: $6.99 per lb.</p>
+            <h3>Eggplant:</h3>
+            <p>Our eggplants are smooth and glossy, with a rich, savory flavor that enhances a wide range of dishes. From grilling to roasting or making a hearty ratatouille, eggplant adds depth and texture to your meals. Price: $3.99 per lb.</p>
+        </div>
+
+        <div id="shop" class="page">
+            <h2>Our Products</h2>
+            <section class="products">
+                <div class="product">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple">
+                    <h3>Apple</h3>
+                    <p>$5.00</p>
+                    <button onclick="addToCart('Apple', 5.00, 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg')">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana">
+                    <h3>Banana</h3>
+                    <p>$10.00</p>
+                    <button onclick="addToCart('Banana', 10.00, 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg')">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Carrots.JPG/1200px-Carrots.JPG" alt="Carrot">
+                    <h3>Carrot</h3>
+                    <p>$7.00</p>
+                    <button onclick="addToCart('Carrot', 7.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Carrots.JPG/1200px-Carrots.JPG')">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%C5%9Awie%C5%BCy_daktyle_odmiany_MEDJOOL.jpg/330px-%C5%9Awie%C5%BCy_daktyle_odmiany_MEDJOOL.jpg" alt="Dates">
+                    <h3>Dates</h3>                              
+                    <p>$12.00</p>
+                    <button onclick="addToCart('Dates', 12.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%C5%9Awie%C5%BCy_daktyle_odmiany_MEDJOOL.jpg/330px-%C5%9Awie%C5%BCy_daktyle_odmiany_MEDJOOL.jpg')">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src=https://upload.wikimedia.org/wikipedia/commons/a/aa/Eggplant.jpg alt="Eggplant">                     
+                    <h3>Eggplant</h3>
+                    <p>$9.00</p>
+                    <button onclick="addToCart('Eggplant', 9.00, 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Eggplant.jpg')">Add to Cart</button>
+                </div>
+            </section>
+        </div>
+
+        <div id="cart" class="page">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <p>Your cart is empty.</p>
+            </div>
+        </div>
+
+        <div id="checkout" class="page">
+            <h2>Checkout Page</h2>
+            <div id="checkout-bill">
+                <p>Your cart is empty.</p>
+            </div>
+            <div id="qr-code" style="text-align: center; margin-top: 1rem;">
+                <img src="C:\Users\karun\OneDrive\Pictures\Screenshots\IMG-20240831-WA0014[1].jpg" alt="QR Code">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Online Grocery Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const selectedPage = document.getElementById(pageId);
+            selectedPage.classList.add('active');
+
+            if (pageId === 'cart') {
+                updateCartPage();
+            }
+
+            if (pageId === 'checkout') {
+                updateCheckoutPage();
+            }
+        }
+
+        function addToCart(productName, productPrice, productImage) {
+            cart.push({ name: productName, price: productPrice, image: productImage });
+            alert(`${productName} has been added to your cart.`);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartPage();
+        }
+
+        function updateCartPage() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    const cartItemDiv = document.createElement('div');
+                    cartItemDiv.className = 'cart-item';
+
+                    const img = document.createElement('img');
+                    img.src = item.image;
+                    img.alt = item.name;
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'details';
+
+                    const name = document.createElement('h3');
+                    name.textContent = item.name;
+
+                    const price = document.createElement('p');
+                    price.textContent = `$${item.price.toFixed(2)}`;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.onclick = () => removeFromCart(index);
+
+                    detailsDiv.appendChild(name);
+                    detailsDiv.appendChild(price);
+                    cartItemDiv.appendChild(img);
+                    cartItemDiv.appendChild(detailsDiv);
+                    cartItemDiv.appendChild(removeButton);
+                    cartItemsDiv.appendChild(cartItemDiv);
+                });
+            }
+        }
+
+        function updateCheckoutPage() {
+            const checkoutBillDiv = document.getElementById('checkout-bill');
+            checkoutBillDiv.innerHTML = '';
+
+            if (cart.length === 0) {
+                checkoutBillDiv.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                const ul = document.createElement('ul');
+                let total = 0;
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                    ul.appendChild(li);
+                    total += item.price;
+                });
+                checkoutBillDiv.appendChild(ul);
+
+                const totalLi = document.createElement('li');
+                totalLi.innerHTML = `<strong>Total: $${total.toFixed(2)}</strong>`;
+                checkoutBillDiv.appendChild(totalLi);
+
+                const payButton = document.createElement('button');
+                payButton.textContent = 'Pay';
+                payButton.style.backgroundColor = '#4CAF50';
+                payButton.style.color = 'white';
+                payButton.style.padding = '0.5rem 1rem';
+                payButton.style.cursor = 'pointer';
+                payButton.style.marginTop = '1rem';
+                payButton.onclick = showQRCode;
+                checkoutBillDiv.appendChild(payButton);
+
+                const thankYouMessage = document.createElement('h3');
+                thankYouMessage.textContent = 'Thank you for your purchase!';
+                checkoutBillDiv.appendChild(thankYouMessage);
+            }
+        }
+
+        function showQRCode() {
+            const qrCodeDiv = document.getElementById('qr-code');
+            qrCodeDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
